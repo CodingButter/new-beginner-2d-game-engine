@@ -4,7 +4,10 @@ import spriteSheets from "../../res/SpriteSheets";
 const Assets = {
   init: () => {
     spriteSheets.map(({ label, path, spriteWidth, spriteHeight, assets }) => {
-      Assets[label] = {};
+      Assets[label] = {
+        spriteWidth,
+        spriteHeight
+      };
       var sheet = new SpriteSheet(ImageLoader.loadImage(path));
       assets.map((asset) => {
         Assets.cropAsset({ sheet, label, asset, spriteWidth, spriteHeight });

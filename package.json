@@ -1,7 +1,7 @@
 {
-  "name": "vanilla",
+  "name": "Javascript 2d Game Engine Port",
   "version": "1.0.0",
-  "description": "JavaScript example starter project",
+  "description": "Javascript Port of a java game engine. available live at http://wtich.tv/codingbutter",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
@@ -12,8 +12,5 @@
     "@babel/core": "7.2.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": [
-    "javascript",
-    "starter"
-  ]
+  "keywords": ["javascript", "starter"]
 }
