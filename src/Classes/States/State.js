@@ -2,8 +2,9 @@ var currentState = null;
 
 export default class State {
   //CLASS
-
-  constructor() {}
+  constructor(game) {
+    this.game = game;
+  }
 
   /**
    * @override

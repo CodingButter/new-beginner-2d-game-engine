@@ -1,6 +1,6 @@
-import { Assets } from "../GFX";
+import { Assets } from "Classes/GFX";
 import State from "./State";
-
+import Player from "Classes/Entities/Creatures/Player";
 export default class GameState extends State {
   constructor() {
     super();

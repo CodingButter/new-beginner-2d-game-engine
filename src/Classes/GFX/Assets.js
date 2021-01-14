@@ -1,5 +1,5 @@
-import { ImageLoader, SpriteSheet } from ".";
-import spriteSheets from "../../res/SpriteSheets";
+import { ImageLoader, SpriteSheet } from "Classes/GFX";
+import spriteSheets from "res/SpriteSheets";
 
 const Assets = {
   init: () => {

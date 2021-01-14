@@ -1,5 +1,5 @@
 import "./styles.css";
-import Game from "./Classes/Game";
+import Game from "Classes/Game";
 
 const app = document.querySelector("#app");
 

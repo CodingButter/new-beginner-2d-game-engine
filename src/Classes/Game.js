@@ -1,6 +1,6 @@
-import { Display } from "./Display";
-import { Assets } from "./GFX";
-import { State, GameState, MenuState } from "./States";
+import { Display } from "Classes/Display";
+import { Assets } from "Classes/GFX";
+import { State, GameState, MenuState } from "Classes/States";
 //Set Private Variables
 //Game Info
 var parent, width, height, title;
@@ -51,9 +51,12 @@ export default class Game {
   }
 
   init() {
+    //Initialize States
     menuState = new MenuState();
     gameState = new GameState();
     State.setState(gameState);
+
+    //Initiate Display and getting context
     display = new Display({ parent, title, width, height });
     g = display.getContext();
 
