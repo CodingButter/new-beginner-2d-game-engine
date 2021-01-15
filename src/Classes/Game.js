@@ -1,5 +1,5 @@
 import { Display } from "Classes/Display";
-import { Assets } from "Classes/GFX";
+import { Assets, GameCamera } from "Classes/GFX";
 import { State, GameState, MenuState } from "Classes/States";
 import { KeyManager } from "Classes/Inputs";
 import { Tile } from "Classes/Tiles";
@@ -14,7 +14,7 @@ var running, lastTime;
 var gameState, menuState;
 
 //Render Stuffs
-var display, g;
+var display, g, gameCamera;
 
 export default class Game {
   constructor({ parentElement, gameTitle, gameWidth, gameHeight }) {
@@ -55,6 +55,7 @@ export default class Game {
 
   init() {
     Assets.init();
+    gameCamera = new GameCamera(this, 0, 0);
     Tile.setTiles();
     //Initialize States
     menuState = new MenuState(this);
@@ -90,7 +91,16 @@ export default class Game {
   }
 
   //Getters
+  getWidth() {
+    return width;
+  }
+  getHeight() {
+    return height;
+  }
   getKeyManager() {
     return KeyManager;
+  }
+  getGameCamera() {
+    return gameCamera;
   }
 }

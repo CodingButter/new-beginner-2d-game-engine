@@ -2,7 +2,8 @@ import { Vector } from "Classes/Utilities/Math";
 const entities = [];
 
 export default class Entity {
-  constructor(x, y, width, height) {
+  constructor(game, x, y, width, height) {
+    this.game = game;
     this.position = new Vector(x, y);
     this.size = { width, height };
     entities.push(this);

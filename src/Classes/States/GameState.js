@@ -1,7 +1,9 @@
 import State from "./State";
 import { Player } from "Classes/Entities/Creatures";
+import { World } from "Classes/Worlds";
+import { firstWorld } from "res/worlds";
 import { Tile } from "Classes/Tiles";
-var player;
+var player, world;
 export default class GameState extends State {
   constructor(game) {
     super(game);
@@ -9,15 +11,21 @@ export default class GameState extends State {
   }
 
   init() {
-    player = new Player(this.game, 10, 10);
+    player = new Player(
+      this.game,
+      firstWorld.spawn.x * Tile.DEFAULT_WIDTH,
+      firstWorld.spawn.y * Tile.DEFAULT_HEIGHT
+    );
+    world = new World(this.game, firstWorld);
   }
 
   tick(deltaTime) {
+    world.tick(deltaTime);
     player.tick(deltaTime);
   }
 
   render(g) {
-    Tile.tiles[2].render(g, 0, 0);
+    world.render(g);
     player.render(g);
   }
 }

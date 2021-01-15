@@ -1,7 +1,7 @@
 {
-  "name": "Javascript 2d Game Engine Port",
+  "name": "new-2d-game",
   "version": "1.0.0",
-  "description": "Javascript Port of a java game engine. available live at http://wtich.tv/codingbutter",
+  "description": "project I am going to be working with for my tutorial series",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
@@ -12,5 +12,10 @@
     "@babel/core": "7.2.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": ["javascript", "starter"]
+  "keywords": [
+    "rpg",
+    "top down",
+    "game",
+    "context2d"
+  ]
 }

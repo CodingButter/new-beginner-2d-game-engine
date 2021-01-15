@@ -4,23 +4,19 @@ export default class Vector {
     this.y = y;
   }
   add(vector) {
-    const newVector = new Vector(this.x + vector.x, this.y + vector.y);
-    this.x = newVector.x;
-    this.y = newVector.y;
+    if (typeof vector !== "object") vector = new Vector(vector, vector);
+    return new Vector(this.x + vector.x, this.y + vector.y);
   }
   subtract(vector) {
-    const newVector = new Vector(this.x - vector.x, this.y - vector.y);
-    this.x = newVector.x;
-    this.y = newVector.y;
+    if (typeof vector !== "object") vector = new Vector(vector, vector);
+    return new Vector(this.x - vector.x, this.y - vector.y);
   }
   multiply(vector) {
-    const newVector = new Vector(this.x * vector.x, this.y * vector.y);
-    this.x = newVector.x;
-    this.y = newVector.y;
+    if (typeof vector !== "object") vector = new Vector(vector, vector);
+    return new Vector(this.x * vector.x, this.y * vector.y);
   }
   devide(vector) {
-    const newVector = new Vector(this.x / vector.x, this.y / vector.y);
-    this.x = newVector.x;
-    this.y = newVector.y;
+    if (typeof vector !== "object") vector = new Vector(vector, vector);
+    return new Vector(this.x / vector.x, this.y / vector.y);
   }
 }

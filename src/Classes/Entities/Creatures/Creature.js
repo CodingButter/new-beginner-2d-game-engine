@@ -1,15 +1,15 @@
 import { Entity } from "Classes/Entities";
 import { Vector } from "Classes/Utilities/Math";
 export default class Creature extends Entity {
-  constructor(x, y, width, height) {
-    super(x, y, width, height);
+  constructor(game, x, y, width, height) {
+    super(game, x, y, width, height);
     this.health = Creature.DEFAULT_HEALTH;
     this.speed = Creature.DEFAULT_SPEED;
     this.movement = new Vector(0, 0);
   }
 
   move() {
-    this.position.add(this.movement);
+    this.position = this.position.add(this.movement);
   }
 
   getHealth() {

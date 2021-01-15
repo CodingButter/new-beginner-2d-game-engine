@@ -1,5 +1,5 @@
 import { ImageLoader, SpriteSheet } from "Classes/GFX";
-import spriteSheets from "res/SpriteSheets";
+import spriteSheets from "res/sprites/SpriteSheets";
 import { toInt } from "Classes/Utilities/Math";
 
 const allAssets = [];
@@ -8,7 +8,6 @@ const loadImages = () => {
   spriteSheets.map(({ label, path, spriteWidth, spriteHeight, assets }) => {
     var image = ImageLoader.loadImage(path, () => {
       allAssets[id].status = "loaded";
-      console.log(Assets.getTotalProgress());
     });
     var id = allAssets.length;
     allAssets.push({
