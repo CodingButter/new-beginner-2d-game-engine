@@ -2,8 +2,9 @@ import { Vector } from "Classes/Utilities/Math";
 const entities = [];
 
 export default class Entity {
-  constructor(x, y) {
+  constructor(x, y, width, height) {
     this.position = new Vector(x, y);
+    this.size = { width, height };
     entities.push(this);
   }
 
@@ -13,6 +14,20 @@ export default class Entity {
 
   render(g) {
     console.warn("Entities Need render method");
+  }
+
+  getPosition() {
+    return this.position;
+  }
+  getSize() {
+    return this.size;
+  }
+  setPosition(vector) {
+    this.position = vector;
+  }
+  setSize({ width, height }) {
+    this.size.width = width || this.size.width;
+    this.size.height = height || this.size.height;
   }
 
   //Static

@@ -1,19 +1,21 @@
-import { Assets } from "Classes/GFX";
 import State from "./State";
-import Player from "Classes/Entities/Creatures/Player";
+import { Player } from "Classes/Entities/Creatures";
+var player;
 export default class GameState extends State {
-  constructor() {
-    super();
+  constructor(game) {
+    super(game);
+    this.init();
   }
-  tick(deltaTime) {}
+
+  init() {
+    player = new Player(this.game, 10, 10);
+  }
+
+  tick(deltaTime) {
+    player.tick(deltaTime);
+  }
 
   render(g) {
-    g.drawSprite(
-      Assets.mainLevel.fall_tree,
-      0,
-      0,
-      Assets.mainLevel.fall_tree.width,
-      Assets.mainLevel.fall_tree.height
-    );
+    player.render(g);
   }
 }

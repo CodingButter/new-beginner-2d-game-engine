@@ -1,5 +1,3 @@
 import Entity from "./Entity";
 
-export default {
-  Entity
-};
+export { Entity };

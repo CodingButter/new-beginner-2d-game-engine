@@ -1,5 +1,7 @@
 import Vector from "./Vector";
 
-export default {
-  Vector
-};
+function toInt(value) {
+  return value | 0;
+}
+
+export { Vector, toInt };

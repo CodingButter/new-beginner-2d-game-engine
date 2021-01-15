@@ -1,6 +1,7 @@
 import { Display } from "Classes/Display";
 import { Assets } from "Classes/GFX";
 import { State, GameState, MenuState } from "Classes/States";
+import { KeyManager } from "Classes/Inputs";
 //Set Private Variables
 //Game Info
 var parent, width, height, title;
@@ -25,6 +26,7 @@ export default class Game {
 
   //Tick Method runs all game update logic
   tick(deltaTime) {
+    KeyManager.tick();
     if (State.getState()) {
       State.getState().tick(deltaTime);
     }
@@ -39,7 +41,7 @@ export default class Game {
     g.fillStyle = "#ccc";
     g.fillRect(0, 0, width, height);
     g.fillStyle = "#000";
-    if (State.getState()) {
+    if (State.getState() && Assets.getTotalProgress() === 100) {
       State.getState().render(g);
     }
 
@@ -51,17 +53,16 @@ export default class Game {
   }
 
   init() {
+    Assets.init();
+
     //Initialize States
-    menuState = new MenuState();
-    gameState = new GameState();
+    menuState = new MenuState(this);
+    gameState = new GameState(this);
     State.setState(gameState);
 
     //Initiate Display and getting context
     display = new Display({ parent, title, width, height });
     g = display.getContext();
-
-    //Temp Code
-    Assets.init();
 
     const self = this;
     const loop = (now) => {
@@ -85,5 +86,10 @@ export default class Game {
   }
   stop() {
     running = false;
+  }
+
+  //Getters
+  getKeyManager() {
+    return KeyManager;
   }
 }

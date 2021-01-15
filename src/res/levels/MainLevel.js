@@ -6,24 +6,36 @@ export default {
   assets: [
     {
       label: "dirt",
-      x: 0,
-      y: 0,
-      width: 1,
-      height: 1
+      frames: [
+        {
+          x: 0,
+          y: 0,
+          width: 1,
+          height: 1
+        }
+      ]
     },
     {
       label: "crate",
-      x: 0,
-      y: 35,
-      width: 1,
-      height: 1
+      frames: [
+        {
+          x: 0,
+          y: 35,
+          width: 1,
+          height: 1
+        }
+      ]
     },
     {
       label: "fall_tree",
-      x: 0,
-      y: 7,
-      width: 4,
-      height: 4
+      frames: [
+        {
+          x: 0,
+          y: 7,
+          width: 4,
+          height: 4
+        }
+      ]
     }
   ]
 };

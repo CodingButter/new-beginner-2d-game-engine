@@ -1,8 +1,8 @@
 import State from "./State";
 
 export default class MenuState extends State {
-  constructor() {
-    super();
+  constructor(game) {
+    super(game);
   }
   tick(deltaTime) {}
 
