@@ -1,7 +1,6 @@
 import Creature from "./Creature";
 import { Assets } from "Classes/GFX";
 import { toInt, Vector } from "Classes/Utilities/Math";
-
 export default class Player extends Creature {
   constructor(game, x, y) {
     super(x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);

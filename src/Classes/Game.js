@@ -2,6 +2,7 @@ import { Display } from "Classes/Display";
 import { Assets } from "Classes/GFX";
 import { State, GameState, MenuState } from "Classes/States";
 import { KeyManager } from "Classes/Inputs";
+import { Tile } from "Classes/Tiles";
 //Set Private Variables
 //Game Info
 var parent, width, height, title;
@@ -54,7 +55,7 @@ export default class Game {
 
   init() {
     Assets.init();
-
+    Tile.setTiles();
     //Initialize States
     menuState = new MenuState(this);
     gameState = new GameState(this);

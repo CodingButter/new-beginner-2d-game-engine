@@ -5,11 +5,33 @@ export default {
   spriteHeight: 32,
   assets: [
     {
-      label: "dirt",
+      label: "grass",
       frames: [
         {
           x: 0,
           y: 0,
+          width: 1,
+          height: 1
+        }
+      ]
+    },
+    {
+      label: "dirt",
+      frames: [
+        {
+          x: 1,
+          y: 0,
+          width: 1,
+          height: 1
+        }
+      ]
+    },
+    {
+      label: "rock",
+      frames: [
+        {
+          x: 0,
+          y: 22,
           width: 1,
           height: 1
         }
