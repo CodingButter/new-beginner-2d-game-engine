@@ -1,4 +1,4 @@
-import { GrassTile, DirtTile, RockTile } from "Classes/Tiles";
+import { GrassTile, DirtTile, RockTile, CrateTile } from "Classes/Tiles";
 class Tile {
   constructor(texture, id) {
     this.id = id;
@@ -25,6 +25,7 @@ Tile.setTiles = () => {
   Tile.grassTile = new GrassTile(0);
   Tile.dirtTile = new DirtTile(1);
   Tile.rockTile = new RockTile(2);
+  Tile.crateTile = new CrateTile(3);
 };
 Tile.TILEWIDTH = Tile.TILEHEIGHT = 32;
 

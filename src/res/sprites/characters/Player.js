@@ -4,6 +4,19 @@ export default {
   spriteWidth: 32,
   spriteHeight: 32,
   assets: [
+    //Idle
+    {
+      label: "idle",
+      frames: [
+        {
+          x: 0,
+          y: 4,
+          width: 1,
+          height: 1
+        }
+      ]
+    },
+
     //Walking Animations
     {
       label: "walkUp",

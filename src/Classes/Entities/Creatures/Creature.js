@@ -124,6 +124,33 @@ export default class Creature extends Entity {
   setyMove(value) {
     this.yMove = value;
   }
+  getMovementDirection() {
+    if (this.xMove === 0 && this.yMove < 0) {
+      return "Up";
+    }
+    if (this.xMove > 0 && this.yMove < 0) {
+      return "UpRight";
+    }
+    if (this.xMove > 0 && this.yMove === 0) {
+      return "Right";
+    }
+    if (this.xMove > 0 && this.yMove > 0) {
+      return "DownRight";
+    }
+    if (this.xMove === 0 && this.yMove > 0) {
+      return "Down";
+    }
+    if (this.xMove < 0 && this.yMove > 0) {
+      return "DownLeft";
+    }
+    if (this.xMove < 0 && this.yMove === 0) {
+      return "Left";
+    }
+    if (this.xMove < 0 && this.yMove < 0) {
+      return "UpLeft";
+    }
+    return "Idle";
+  }
 }
 
 Creature.DEFAULT_HEALTH = 10;
