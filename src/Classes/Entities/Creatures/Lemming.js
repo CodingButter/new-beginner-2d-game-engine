@@ -1,16 +1,11 @@
 import Creature from "./Creature";
 import { Animation, Assets } from "Classes/GFX";
-import { toInt } from "Classes/Utilities/Math";
+import { toInt, getDistance } from "Classes/Utilities/Math";
 import { fpsToMili } from "Classes/Utilities";
-export default class Player extends Creature {
-  constructor(handler, x, y) {
-    super(
-      handler,
-      x,
-      y,
-      Creature.DEFAULT_WIDTH * 2,
-      Creature.DEFAULT_HEIGHT * 2
-    );
+export default class Lemming extends Creature {
+  constructor(handler, parent, x, y) {
+    super(handler, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
+    this.parent = parent;
     this.bounds.x = this.width / 2.5;
     this.bounds.y = this.height - this.height / 2.5;
     this.bounds.width = this.width / 4;
@@ -18,7 +13,11 @@ export default class Player extends Creature {
     this.texture = Assets.player;
     this.speed = Creature.DEFAULT_SPEED + 50;
     this.sprint = 0;
+    this.speedDecay = 0.95;
 
+    this.trailEasing = 80;
+    //Trail Radius how close it follows
+    this.trailRadius = 50;
     //Animation
     var fps = 8;
     this.animations = {
@@ -35,35 +34,25 @@ export default class Player extends Creature {
     this.currentAnimation = this.animations.walkDown;
   }
   getInput(deltaTime) {
-    this.xMove = 0;
-    this.yMove = 0;
-    this.sprint = 0;
-    if (this.handler.getKeyManager().shift) {
-      this.sprint = 100;
-    }
-
-    if (this.handler.getKeyManager().left) {
-      this.xMove = -(this.sprint + this.speed) * deltaTime;
-    }
-
-    if (this.handler.getKeyManager().right) {
-      this.xMove = (this.sprint + this.speed) * deltaTime;
-    }
-
-    if (this.handler.getKeyManager().up) {
-      this.yMove = -(this.sprint + this.speed) * deltaTime;
-    }
-
-    if (this.handler.getKeyManager().down) {
-      this.yMove = (this.sprint + this.speed) * deltaTime;
+    this.xMove *= this.speedDecay;
+    this.yMove *= this.speedDecay;
+    if (Math.abs(this.xMove) < 0.05) this.xMove = 0;
+    if (Math.abs(this.yMove) < 0.05) this.yMove = 0;
+    if (
+      getDistance(this.x, this.y, this.parent.x, this.parent.y) >
+        this.trailRadius ||
+      1 === 1
+    ) {
+      this.xMove +=
+        -(this.x - (this.parent.x + this.parent.width / 2)) / this.trailEasing;
+      this.yMove +=
+        -(this.y - (this.parent.y + this.parent.height / 2)) / this.trailEasing;
     }
   }
 
   tick(deltaTime) {
     this.setCurrentAnimation();
-    this.currentAnimation.tick(deltaTime, -this.sprint / 10);
-
-    this.handler.getGameCamera().centerOnEntity(this);
+    this.currentAnimation.tick(deltaTime, -this.getAbsoluteSpeed() / 5);
     this.getInput(deltaTime);
     this.move();
   }

@@ -124,6 +124,9 @@ export default class Creature extends Entity {
   setyMove(value) {
     this.yMove = value;
   }
+  getAbsoluteSpeed() {
+    return Math.sqrt(this.xMove * this.xMove + this.yMove * this.yMove);
+  }
   getMovementDirection() {
     if (this.xMove === 0 && this.yMove < 0) {
       return "Up";
