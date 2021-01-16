@@ -1,12 +1,15 @@
+import { Rectangle } from "Classes/Utilities/Math";
+
 const entities = [];
 
 export default class Entity {
-  constructor(game, x, y, width, height) {
-    this.game = game;
+  constructor(handler, x, y, width, height) {
+    this.handler = handler;
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.bounds = new Rectangle(0, 0, width, height);
     entities.push(this);
   }
 

@@ -5,18 +5,19 @@ import { firstWorld } from "res/worlds";
 import { Tile } from "Classes/Tiles";
 var player, world;
 export default class GameState extends State {
-  constructor(game) {
-    super(game);
+  constructor(handler) {
+    super(handler);
     this.init();
   }
 
   init() {
+    world = new World(this.handler, firstWorld);
+    this.handler.setWorld(world);
     player = new Player(
-      this.game,
-      firstWorld.spawn.x * Tile.DEFAULT_WIDTH,
-      firstWorld.spawn.y * Tile.DEFAULT_HEIGHT
+      this.handler,
+      firstWorld.spawn.x * Tile.TILEWIDTH,
+      firstWorld.spawn.y * Tile.TILEHEIGHT
     );
-    world = new World(this.game, firstWorld);
   }
 
   tick(deltaTime) {

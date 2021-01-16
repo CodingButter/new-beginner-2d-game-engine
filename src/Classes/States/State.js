@@ -2,8 +2,8 @@ var currentState = null;
 
 export default class State {
   //CLASS
-  constructor(game) {
-    this.game = game;
+  constructor(handler) {
+    this.handler = handler;
   }
 
   /**

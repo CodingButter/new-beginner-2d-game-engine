@@ -3,7 +3,7 @@ import Game from "Classes/Game";
 
 const app = document.querySelector("#app");
 
-const gameWidth = 400;
+const gameWidth = 600;
 const gameHeight = 400;
 const parentElement = app;
 const gameTitle = "TileGame";

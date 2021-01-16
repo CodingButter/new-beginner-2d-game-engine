@@ -8,7 +8,7 @@ class Tile {
 
   tick(deltaTime) {}
   render(g, x, y) {
-    g.drawSprite(this.texture[0], x, y, Tile.DEFAULT_WIDTH, Tile.DEFAULT_WIDTH);
+    g.drawSprite(this.texture[0], x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
   }
 
   isSolid() {
@@ -26,6 +26,6 @@ Tile.setTiles = () => {
   Tile.dirtTile = new DirtTile(1);
   Tile.rockTile = new RockTile(2);
 };
-Tile.DEFAULT_WIDTH = Tile.DEFAULT_HEIGHT = 32;
+Tile.TILEWIDTH = Tile.TILEHEIGHT = 32;
 
 export default Tile;

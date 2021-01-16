@@ -1,11 +1,14 @@
 import { Display } from "Classes/Display";
 import { Assets, GameCamera } from "Classes/GFX";
 import { State, GameState, MenuState } from "Classes/States";
+import Handler from "Classes/Handler";
 import { KeyManager } from "Classes/Inputs";
 import { Tile } from "Classes/Tiles";
 //Set Private Variables
+//Handler
+var handler;
 //Game Info
-var parent, width, height, title;
+var parent, width, height, maxWidth, maxHeight, title;
 
 //Game loop
 var running, lastTime;
@@ -22,6 +25,8 @@ export default class Game {
     title = gameTitle;
     width = gameWidth;
     height = gameHeight;
+    maxWidth = gameWidth;
+    maxHeight = gameHeight;
     running = false;
   }
 
@@ -55,15 +60,17 @@ export default class Game {
 
   init() {
     Assets.init();
-    gameCamera = new GameCamera(this, 0, 0);
+    handler = new Handler(this);
+    gameCamera = new GameCamera(handler, 0, 0);
     Tile.setTiles();
     //Initialize States
-    menuState = new MenuState(this);
-    gameState = new GameState(this);
+    menuState = new MenuState(handler);
+    gameState = new GameState(handler);
     State.setState(gameState);
 
     //Initiate Display and getting context
-    display = new Display({ parent, title, width, height });
+    display = new Display({ handler, parent, title, width, height });
+    display.setSize();
     g = display.getContext();
 
     const self = this;
@@ -91,11 +98,25 @@ export default class Game {
   }
 
   //Getters
+  getMaxHeight() {
+    return maxHeight;
+  }
+  getMaxWidth() {
+    return maxWidth;
+  }
   getWidth() {
     return width;
   }
   getHeight() {
     return height;
+  }
+  setWidth(value) {
+    width = value;
+    display.getCanvas().width = value;
+  }
+  setHeight(value) {
+    height = value;
+    display.getCanvas().height = value;
   }
   getKeyManager() {
     return KeyManager;
