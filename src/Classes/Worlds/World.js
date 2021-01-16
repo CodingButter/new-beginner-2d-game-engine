@@ -17,16 +17,37 @@ export default class World {
   }
   tick(deltaTime) {}
   render(g) {
-    for (var column = 0; column < this.columns; column++) {
-      for (var row = 0; row < this.rows; row++) {
+    var startRow = Math.max(
+      0,
+      toInt(this.game.getGameCamera().getyOffset() / Tile.DEFAULT_HEIGHT)
+    );
+    var startColumn = Math.max(
+      0,
+      toInt(this.game.getGameCamera().getxOffset() / Tile.DEFAULT_WIDTH)
+    );
+    var endRow = Math.min(
+      this.rows,
+      toInt(
+        (this.game.getGameCamera().getyOffset() + this.game.getHeight()) /
+          Tile.DEFAULT_HEIGHT
+      ) + 1
+    );
+    var endColumn = Math.min(
+      this.columns,
+      toInt(
+        (this.game.getGameCamera().getxOffset() + this.game.getWidth()) /
+          Tile.DEFAULT_WIDTH
+      ) + 1
+    );
+    for (var column = startColumn; column < endColumn; column++) {
+      for (var row = startRow; row < endRow; row++) {
         this.getTile(column, row).render(
           g,
           toInt(
-            column * Tile.DEFAULT_WIDTH -
-              this.game.getGameCamera().getOffset().x
+            column * Tile.DEFAULT_WIDTH - this.game.getGameCamera().getxOffset()
           ),
           toInt(
-            row * Tile.DEFAULT_HEIGHT - this.game.getGameCamera().getOffset().y
+            row * Tile.DEFAULT_HEIGHT - this.game.getGameCamera().getyOffset()
           )
         );
       }

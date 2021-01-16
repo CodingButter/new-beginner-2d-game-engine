@@ -1,29 +1,28 @@
-import { Vector } from "Classes/Utilities/Math";
 export default class GameCamera {
   constructor(game, xOffset, yOffset) {
     this.game = game;
-    this.offset = new Vector(xOffset, yOffset);
+    this.xOffset = 0;
+    this.yOffset = 0;
     this.easing = GameCamera.DEFAULT_EASING;
   }
 
-  move(vector) {
-    this.offset = this.offset.add(vector);
+  move(x, y) {
+    this.xOffset -= (this.xOffset - x) / this.easing;
+    this.yOffset -= (this.yOffset - y) / this.easing;
   }
 
   centerOnEntity(entity) {
-    var targetOffset = entity.position.subtract(
-      new Vector(
-        this.game.getWidth() / 2 - entity.size.width / 2,
-        this.game.getHeight() / 2 - entity.size.height / 2
-      )
-    );
-    this.offset = this.offset.subtract(
-      this.offset.subtract(targetOffset).devide(this.easing)
+    this.move(
+      entity.x - this.game.getWidth() / 2 - entity.width / 2,
+      entity.y - this.game.getHeight() / 2 - entity.height / 2
     );
   }
 
-  getOffset() {
-    return this.offset;
+  getxOffset() {
+    return this.xOffset;
+  }
+  getyOffset() {
+    return this.xOffset;
   }
 }
 GameCamera.DEFAULT_EASING = 20;

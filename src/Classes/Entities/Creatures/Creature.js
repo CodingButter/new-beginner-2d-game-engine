@@ -1,15 +1,16 @@
 import { Entity } from "Classes/Entities";
-import { Vector } from "Classes/Utilities/Math";
 export default class Creature extends Entity {
   constructor(game, x, y, width, height) {
     super(game, x, y, width, height);
     this.health = Creature.DEFAULT_HEALTH;
     this.speed = Creature.DEFAULT_SPEED;
-    this.movement = new Vector(0, 0);
+    this.moveX = 0;
+    this.moveY = 0;
   }
 
   move() {
-    this.position = this.position.add(this.movement);
+    this.x += this.moveX;
+    this.y += this.moveY;
   }
 
   getHealth() {
@@ -18,8 +19,11 @@ export default class Creature extends Entity {
   getSpeed() {
     return this.speed;
   }
-  getMovement() {
-    return this.movement;
+  getMoveX() {
+    return this.moveX;
+  }
+  getMoveY() {
+    return this.moveY;
   }
 
   setHealth(value) {
@@ -28,8 +32,11 @@ export default class Creature extends Entity {
   setSpeed(value) {
     this.speed = value;
   }
-  setMovement(vector) {
-    this.movement = vector;
+  setMoveX(value) {
+    this.moveX = value;
+  }
+  setMoveY(value) {
+    this.moveY = value;
   }
 }
 

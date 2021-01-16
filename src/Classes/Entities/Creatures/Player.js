@@ -3,9 +3,9 @@ import { Assets } from "Classes/GFX";
 import { toInt, Vector } from "Classes/Utilities/Math";
 export default class Player extends Creature {
   constructor(game, x, y) {
-    super(game, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
+    super(game, x, y, Creature.DEFAULT_WIDTH * 2, Creature.DEFAULT_HEIGHT * 2);
     this.texture = Assets.player;
-    this.speed = Creature.DEFAULT_SPEED;
+    this.speed = Creature.DEFAULT_SPEED + 25;
     this.sprint = 0;
   }
 

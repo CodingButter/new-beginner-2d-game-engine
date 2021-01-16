@@ -1,11 +1,12 @@
-import { Vector } from "Classes/Utilities/Math";
 const entities = [];
 
 export default class Entity {
   constructor(game, x, y, width, height) {
     this.game = game;
-    this.position = new Vector(x, y);
-    this.size = { width, height };
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
     entities.push(this);
   }
 
@@ -16,19 +17,26 @@ export default class Entity {
   render(g) {
     console.warn("Entities Need render method");
   }
-
-  getPosition() {
-    return this.position;
+  getX() {
+    return this.x;
   }
-  getSize() {
-    return this.size;
+  getY() {
+    return this.y;
   }
-  setPosition(vector) {
-    this.position = vector;
+  getWidth() {
+    return this.width;
   }
-  setSize({ width, height }) {
-    this.size.width = width || this.size.width;
-    this.size.height = height || this.size.height;
+  getHeight() {
+    return this.height;
+  }
+  setX(value) {
+    this.x = value;
+  }
+  setWidth(value) {
+    this.width = value;
+  }
+  setHeight(value) {
+    this.height = value;
   }
 
   //Static
