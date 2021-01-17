@@ -2,6 +2,14 @@ import { Entity } from "Classes/Entities";
 import { Tile } from "Classes/Tiles";
 import { toInt } from "Classes/Utilities/Math";
 export default class Creature extends Entity {
+  /**
+   *
+   * @param {Handler} handler
+   * @param {Float} x
+   * @param {Float} y
+   * @param {Integer} width
+   * @param {Integer} height
+   */
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
     this.health = Creature.DEFAULT_HEALTH;
@@ -10,11 +18,17 @@ export default class Creature extends Entity {
     this.yMove = 0;
   }
 
+  /**
+   * Move creature along the x and y
+   */
   move() {
     this.moveX();
     this.moveY();
   }
 
+  /**
+   * Check for collisions then move Creature along the x axis
+   */
   moveX() {
     if (this.xMove > 0) {
       var tx = toInt(
@@ -55,6 +69,9 @@ export default class Creature extends Entity {
     }
   }
 
+  /**
+   * Check for collisions then move Creature alon the y axis
+   */
   moveY() {
     var ty;
     if (this.yMove > 0) {
