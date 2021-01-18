@@ -4,7 +4,10 @@ import { toInt } from "Classes/Utilities/Math";
 
 const allAssets = [];
 
-const loadImages = () => {
+/**
+ * loads the images from the spritesheet
+ */
+function loadImages() {
   spriteSheets.map(({ label, path, spriteWidth, spriteHeight, assets }) => {
     var image = ImageLoader.loadImage(path, () => {
       allAssets[id].status = "loaded";
@@ -23,23 +26,29 @@ const loadImages = () => {
     };
     assets.forEach((asset) => {
       Assets[label][asset.label] = asset.frames.map((frame) => {
-        return Assets.cropAsset({
-          sheet,
-          frame,
-          spriteWidth,
-          spriteHeight
-        });
+        return Assets.cropAsset(sheet, frame, spriteWidth, spriteHeight);
       });
     });
     return null;
   });
-};
+}
 
 const Assets = {
+  /**
+   * Runs initilization code for the assets
+   */
   init: () => {
     loadImages();
   },
-  cropAsset: ({ sheet, frame, spriteWidth, spriteHeight }) => {
+  /**
+   * Returns a cropped sheet object for rendering
+   * @param {Object} sheet
+   * @param {Object} frame
+   * @param {Integer} spriteWidth
+   * @param {Integer} spriteHeight
+   * @returns {Sheet}
+   */
+  cropAsset: (sheet, frame, spriteWidth, spriteHeight) => {
     return sheet.crop(
       frame.x * spriteWidth,
       frame.y * spriteHeight,
@@ -47,6 +56,11 @@ const Assets = {
       frame.height * spriteHeight
     );
   },
+
+  /**
+   * returns the current laoding progress of all the assets
+   * @returns {Integer}
+   */
   getTotalProgress: () => {
     var loaded = allAssets.filter(({ status }) => status === "loaded");
     return toInt(100 * (loaded.length / allAssets.length));

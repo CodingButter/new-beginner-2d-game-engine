@@ -11,6 +11,9 @@ export default class {
   getWorld() {
     return this.world;
   }
+  getState() {
+    return this.game.getState();
+  }
   getMaxGameWidth() {
     return this.game.getMaxWidth();
   }
@@ -30,11 +33,19 @@ export default class {
   getKeyManager() {
     return this.game.getKeyManager();
   }
-
+  getPhysicsFramesPerSecond() {
+    return this.game.getPhysicsFramesPerSecond();
+  }
+  getStatsVisibility() {
+    return this.game.getStatsVisibility();
+  }
   setGame(game) {
     this.game = game;
   }
   setWorld(world) {
     this.world = world;
+  }
+  getPlayer() {
+    this.world.getPlayer();
   }
 }

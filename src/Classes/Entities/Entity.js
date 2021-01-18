@@ -1,5 +1,5 @@
 import { Rectangle } from "Classes/Utilities/Math";
-
+import { toInt } from "Classes/Utilities/Math";
 const entities = [];
 
 export default class Entity {
@@ -18,6 +18,7 @@ export default class Entity {
     this.width = width;
     this.height = height;
     this.bounds = new Rectangle(0, 0, width, height);
+    this.entityId = entities.length;
     entities.push(this);
   }
 
@@ -36,7 +37,51 @@ export default class Entity {
    * @param {CanvasRenderingContext2D} g
    */
   render(g) {
-    console.warn("Entities Need render method");
+    if (this.handler.getStatsVisibility()) {
+      g.fillStyle = "#333";
+      g.fillRect(
+        this.x + this.bounds.x - this.handler.getGameCamera().getxOffset(),
+        this.y + this.bounds.y - this.handler.getGameCamera().getyOffset(),
+        this.bounds.width,
+        this.bounds.height
+      );
+      g.strokeStyle = "#fff";
+      g.strokeRect(
+        this.x + this.bounds.x - this.handler.getGameCamera().getxOffset(),
+        this.y + this.bounds.y - this.handler.getGameCamera().getyOffset(),
+        this.bounds.width,
+        this.bounds.height
+      );
+    }
+  }
+
+  checkEntityCollisions(xOffset, yOffset) {
+    var colliding = false;
+    this.handler
+      .getWorld()
+      .getEntityManager()
+      .getEntities()
+      .forEach((entity) => {
+        if (this !== entity) {
+          if (
+            entity
+              .getCollisionBounds(0, 0)
+              .intersects(this.getCollisionBounds(xOffset, yOffset))
+          ) {
+            colliding = true;
+          }
+        }
+      });
+    return colliding;
+  }
+
+  getCollisionBounds(xOffset, yOffset) {
+    return new Rectangle(
+      toInt(this.x + this.bounds.x + xOffset),
+      toInt(this.y + this.bounds.y + yOffset),
+      this.bounds.width,
+      this.bounds.height
+    );
   }
 
   /**
@@ -97,6 +142,16 @@ export default class Entity {
    */
   setHeight(height) {
     this.height = height;
+  }
+  setHandler(handler) {
+    this.handler = handler;
+  }
+
+  /**
+   * Removes entity from the entities array
+   */
+  remove() {
+    entities.splice(this.entityId, 1);
   }
 
   /**

@@ -1,3 +1,3 @@
 import Entity from "./Entity";
-
-export { Entity };
+import EntityManager from "./EntityManager";
+export { Entity, EntityManager };

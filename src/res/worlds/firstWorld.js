@@ -1,10 +1,12 @@
+import { Tree } from "Classes/Entities/Static";
+
 const a1 = 0,
   a2 = 1,
   a3 = 2,
   a4 = 3;
 export default {
   spawn: {
-    x: 8,
+    x: 9,
     y: 8
   },
   // prettier-ignore
@@ -38,5 +40,28 @@ export default {
     [a3, a1, a2, a1, a1, a1, a1, a1, a2, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a1, a3],
     [a3, a1, a1, a2, a1, a1, a1, a1, a1, a2, a1, a1, a1, a1, a1, a2, a1, a1, a1, a1, a1, a2, a1, a1, a1, a1, a1, a3],
     [a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3, a3]
+  ],
+  staticEntities: [
+    {
+      entityType: () => {
+        return new Tree(null, 0, 0);
+      },
+      x: 5,
+      y: 5
+    },
+    {
+      entityType: () => {
+        return new Tree(null, 0, 0);
+      },
+      x: 8,
+      y: 10
+    },
+    {
+      entityType: () => {
+        return new Tree(null, 0, 0);
+      },
+      x: 2,
+      y: 20
+    }
   ]
 };

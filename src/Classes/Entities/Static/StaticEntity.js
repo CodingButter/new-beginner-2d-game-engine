@@ -11,4 +11,7 @@ export default class StaticEntity extends Entity {
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
   }
+  render(g) {
+    super.render(g);
+  }
 }

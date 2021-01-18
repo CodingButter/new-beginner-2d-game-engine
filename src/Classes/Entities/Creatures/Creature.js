@@ -1,6 +1,9 @@
 import { Entity } from "Classes/Entities";
 import { Tile } from "Classes/Tiles";
 import { toInt } from "Classes/Utilities/Math";
+
+const creatures = [];
+
 export default class Creature extends Entity {
   /**
    *
@@ -12,6 +15,8 @@ export default class Creature extends Entity {
    */
   constructor(handler, x, y, width, height) {
     super(handler, x, y, width, height);
+    this.creatureId = creatures.length;
+    creatures.push(this);
     this.health = Creature.DEFAULT_HEALTH;
     this.speed = Creature.DEFAULT_SPEED;
     this.xMove = 0;
@@ -22,8 +27,12 @@ export default class Creature extends Entity {
    * Move creature along the x and y
    */
   move() {
-    this.moveX();
-    this.moveY();
+    if (!this.checkEntityCollisions(this.xMove, 0)) {
+      this.moveX();
+    }
+    if (!this.checkEntityCollisions(0, this.yMove)) {
+      this.moveY();
+    }
   }
 
   /**
@@ -113,33 +122,101 @@ export default class Creature extends Entity {
     }
   }
 
+  render(g) {
+    super.render(g);
+  }
+  /**
+   * Returns a whether the current x and y intercects a solid tile
+   * @param {Float} x
+   * @param {Float} y
+   *
+   * @returns {Boolean}
+   */
   collisionWithTile(x, y) {
     return this.handler.getWorld().getTile(x, y).isSolid();
   }
+
+  /**
+   * returns the current health of the creature
+   * @returns {Float}
+   */
   getHealth() {
     return this.health;
   }
+
+  /**
+   * returns the current speed of the creature
+   * @returns {Float}
+   */
   getSpeed() {
     return this.speed;
   }
+
+  /**
+   * returns the current xspeed of the creature
+   * @returns {Float}
+   */
   getxMove() {
     return this.xMove;
   }
+
+  /**
+   * returns the current y speed of the creature
+   * @returns {Float}
+   */
   getyMove() {
     return this.yMove;
   }
 
-  setHealth(value) {
-    this.health = value;
+  /**
+   * Sets the health of the current creature
+   * @param {Float} health
+   */
+  setHealth(health) {
+    this.health = health;
   }
-  setSpeed(value) {
-    this.speed = value;
+
+  /**
+   * Sets the speed of the Creature
+   * @param {Float} speed
+   */
+  setSpeed(speed) {
+    this.speed = speed;
   }
-  setxMove(value) {
-    this.xMove = value;
+
+  /**
+   * sets the x movement speed of the creature
+   * @param {Float} xmove
+   */
+  setxMove(xmove) {
+    this.xMove = xmove;
   }
-  setyMove(value) {
-    this.yMove = value;
+
+  /**
+   * sets the y movement speed of the creature
+   * @param {Float} ymove
+   */
+  setyMove(ymove) {
+    this.yMove = ymove;
+  }
+
+  /**
+   * decrements the Creature health by the damage amount
+   * @param {Float} damage
+   */
+  takeDamage(damage) {
+    this.health -= damage;
+    if (this.health <= 0) {
+      this.die();
+    }
+  }
+
+  /**
+   * kills creature and removes it from the entities array.
+   */
+  die() {
+    creatures.splice(this.creatureId);
+    super.remove();
   }
   getAbsoluteSpeed() {
     return Math.sqrt(this.xMove * this.xMove + this.yMove * this.yMove);

@@ -1,18 +1,36 @@
 import { Tile } from "Classes/Tiles";
 import { toInt } from "Classes/Utilities/Math";
+import { EntityManager } from "Classes/Entities";
+import { Player } from "Classes/Entities/Creatures";
 export default class World {
   constructor(handler, world) {
     this.handler = handler;
+    this.entityManager = new EntityManager(handler, new Player(handler, 0, 0));
     this.loadWorld(world);
+    this.entityManager.getPlayer().setX(this.spawnX);
+    this.entityManager.getPlayer().setY(this.spawnY);
   }
   loadWorld(world) {
+    var self = this;
     this.height = world.tiles.length;
     this.width = world.tiles[0].length;
     this.tiles = world.tiles;
+    this.spawnX = world.spawn.x * Tile.TILEWIDTH;
+    this.spawnY = world.spawn.y * Tile.TILEHEIGHT;
+    this.staticEntities = world.staticEntities.map((entity) => {
+      var entityType = entity.entityType();
+      entityType.setX(entity.x * Tile.TILEWIDTH);
+      entityType.setY(entity.y * Tile.TILEHEIGHT);
+      entityType.setHandler(self.handler);
+      self.entityManager.addEntity(entityType);
+    });
   }
 
-  tick(deltaTime) {}
+  tick(deltaTime) {
+    this.entityManager.tick(deltaTime);
+  }
   render(g) {
+    //Render Tiles
     var startY = Math.max(
       0,
       toInt(this.handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT)
@@ -44,6 +62,9 @@ export default class World {
         );
       }
     }
+
+    //Render entities
+    this.entityManager.render(g);
   }
   //Getters
 
@@ -59,5 +80,11 @@ export default class World {
     var t = Tile.tiles[this.tiles[y][x]];
     if (t === undefined) return Tile.dirtTile;
     return t;
+  }
+  getEntityManager() {
+    return this.entityManager;
+  }
+  getPlayer() {
+    return this.entityManager.getPlayer();
   }
 }
