@@ -33,6 +33,15 @@ export default class {
     getKeyManager() {
         return this.game.getKeyManager()
     }
+    getGameCanvas() {
+        return this.game.getGameCanvas()
+    }
+    getGameState() {
+        return this.game.getGameState()
+    }
+    getMenuState() {
+        return this.game.getMenuState()
+    }
     getMouseManager() {
         return this.game.getMouseManager()
     }

@@ -1,21 +1,57 @@
 const buttons = []
 const pressedTriggers = []
 const releasedTriggers = []
-const mousePosition = { x: 0, y: 0 }
+var mousePosition = { x: 0, y: 0 }
 
 export default class MouseManager {
     constructor(handler) {
         this.handler = handler
+        this.init()
+    }
+    init() {
+        var self = this
+
+        this.left = 0
+        this.middle = 1
+        this.right = 2
+        window.onmousedown = ({ button }) => {
+            buttons[button] = true
+            pressedTriggers.map((trigger) => {
+                if (button === trigger.button) {
+                    trigger.callback()
+                }
+                return null
+            })
+        }
+        window.onmouseup = ({ button }) => {
+            buttons[button] = false
+            releasedTriggers.map((trigger) => {
+                if (button === trigger.button) {
+                    trigger.callback()
+                }
+                return null
+            })
+        }
+        window.onmousemove = ({ clientX, clientY }) => {
+            var rect = self.handler.getGameCanvas().getBoundingClientRect()
+            mousePosition = {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            }
+        }
+        window.oncontextmenu = () => {
+            return false
+        }
     }
     tick() {
-        MouseManager.leftPressed = buttons[0]
-        MouseManager.middlePressed = buttons[1]
-        MouseManager.rightPressed = buttons[2]
+        this.leftPressed = buttons[0]
+        this.middlePressed = buttons[1]
+        this.rightPressed = buttons[2]
     }
-    mousePressedTrigger(button, callback) {
+    addMousePressedTrigger(button, callback) {
         pressedTriggers.push({ button, callback })
     }
-    mosueReleasedTrigger(button, callback) {
+    addMouseReleasedTrigger(button, callback) {
         releasedTriggers.push({ button, callback })
     }
     getMousePosition() {
@@ -27,31 +63,4 @@ export default class MouseManager {
     getMouseY() {
         return mousePosition.y
     }
-}
-MouseManager.left = 0
-MouseManager.middle = 1
-MouseManager.right = 2
-
-window.onmouseup = ({ button }) => {
-    buttons[button] = true
-    pressedTriggers.map((trigger) => {
-        if (button === trigger.key) {
-            trigger.callback()
-        }
-        return null
-    })
-}
-window.onmouseup = ({ button }) => {
-    buttons[button] = false
-    releasedTriggers.map((trigger) => {
-        if (button === trigger.key) {
-            trigger.callback()
-        }
-        return null
-    })
-}
-window.onmousemove = ({ clientX, clientY }) => {
-    var rect = this.handler.getGameCanvas().getBoundingClientRect()
-    mousePosition.x = clientX - rect.left
-    mousePosition.y = clientY - rect.top
 }

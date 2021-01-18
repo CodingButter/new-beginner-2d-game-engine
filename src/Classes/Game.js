@@ -49,7 +49,8 @@ export default class Game {
 
     //Tick Method runs all game update logic
     tick(deltaTime) {
-        KeyManager.tick()
+        keyManager.tick()
+        mouseManager.tick()
         if (State.getState()) {
             State.getState().tick(deltaTime)
         }
@@ -90,7 +91,7 @@ export default class Game {
         //Initialize States
         menuState = new MenuState(handler)
         gameState = new GameState(handler)
-        State.setState(gameState)
+        State.setState(menuState)
 
         //Initiate Display and getting context
         display = new Display(handler, parent, title, width, height)
@@ -143,6 +144,12 @@ export default class Game {
     getState() {
         return State.getState()
     }
+    getMenuState() {
+        return menuState
+    }
+    getGameState() {
+        return gameState
+    }
     setWidth(value) {
         width = value
         display.getCanvas().width = value
@@ -152,10 +159,10 @@ export default class Game {
         display.getCanvas().height = value
     }
     getKeyManager() {
-        return this.keyManager
+        return keyManager
     }
     getMouseManager() {
-        return this.mouseManager
+        return mouseManager
     }
     getGameCanvas() {
         return display.getCanvas()
