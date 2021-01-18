@@ -1,16 +1,21 @@
 {
-    "name": "zelda-type-rpg",
-    "version": "1.0.0",
-    "description": "project I am going to be working with for my tutorial series",
-    "main": "index.html",
-    "scripts": {
-        "start": "parcel index.html --open",
-        "build": "parcel build index.html"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "@babel/core": "7.2.0",
-        "parcel-bundler": "^1.6.1"
-    },
-    "keywords": ["rpg", "game", "canvas", "tile game"]
+  "name": "zelda-type-rpg",
+  "version": "1.0.0",
+  "description": "Click the Mouse to start\nWASD to move\nshift to sprint\n\nI'm working on this project for a tutorial series I'm going to start",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "7.2.0",
+    "parcel-bundler": "^1.6.1"
+  },
+  "keywords": [
+    "game",
+    "canvas",
+    "zelda",
+    "pokem"
+  ]
 }
