@@ -1,4 +1,16 @@
+import { toInt } from "Classes/Utilities/Math";
 const entities = [];
+
+function renderSorter(a, b) {
+  if (
+    toInt(a.y + a.bounds.y + a.bounds.height / 2) <=
+    toInt(b.y + b.bounds.y + b.bounds.height / 2)
+  ) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 export default class EntityManager {
   constructor(handler, player) {
     this.handler = handler;
@@ -13,9 +25,7 @@ export default class EntityManager {
   }
 
   render(g) {
-    entities.sort((a, b) => {
-      return a.y + a.bounds.y - (b.y + b.bounds.y + a.bounds.height / 2);
-    });
+    entities.sort(renderSorter);
     entities.forEach((entity, index) => {
       entity.render(g);
     });

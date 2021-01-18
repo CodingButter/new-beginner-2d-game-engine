@@ -1,3 +1,3 @@
 import KeyManager from "./KeyManager";
-
-export { KeyManager };
+import MouseManager from "./MouseManager";
+export { KeyManager, MouseManager };

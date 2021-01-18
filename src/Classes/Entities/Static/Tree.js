@@ -16,10 +16,10 @@ export default class Tree extends StaticEntity {
       Assets.mainLevel.fall_tree[0].width,
       Assets.mainLevel.fall_tree[0].height
     );
-    this.bounds.height = this.height / 4;
-    this.bounds.width = this.width / 3.5;
-    this.bounds.x = this.width / 2.8;
-    this.bounds.y = this.height - this.bounds.height;
+    this.bounds.height = this.height / 9;
+    this.bounds.width = this.width / 4.2;
+    this.bounds.x = this.width / 2.6;
+    this.bounds.y = this.height / 1.11 - this.bounds.height;
   }
 
   /**

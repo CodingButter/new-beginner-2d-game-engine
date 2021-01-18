@@ -20,20 +20,23 @@ window.onkeyup = ({ keyCode }) => {
   });
 };
 
-const KeyManager = {
-  tick: () => {
+class KeyManager {
+  constructor(handler) {
+    this.handler = handler;
+  }
+  tick() {
     KeyManager.left = keys[37] || keys[65];
     KeyManager.up = keys[38] || keys[87];
     KeyManager.right = keys[39] || keys[68];
     KeyManager.down = keys[40] || keys[83];
     KeyManager.shift = keys[16];
-  },
-  keyPressedTrigger: (key, callback) => {
+  }
+  keyPressedTrigger(key, callback) {
     pressedTriggers.push({ key, callback });
-  },
-  keyReleasedTrigger: (key, callback) => {
+  }
+  keyReleasedTrigger(key, callback) {
     releasedTriggers.push({ key, callback });
   }
-};
+}
 
 export default KeyManager;
