@@ -21,11 +21,13 @@ export default class World {
         this.spawnX = world.spawn.x * Tile.TILEWIDTH
         this.spawnY = world.spawn.y * Tile.TILEHEIGHT
         this.staticEntities = world.staticEntities.map((entity) => {
-            var entityType = entity.entityType()
-            entityType.setX(entity.x * Tile.TILEWIDTH)
-            entityType.setY(entity.y * Tile.TILEHEIGHT)
-            entityType.setHandler(self.handler)
-            self.entityManager.addEntity(entityType)
+            entity.positions.forEach((position) => {
+                var entityType = entity.entityType()
+                entityType.setX(position.x * Tile.TILEWIDTH)
+                entityType.setY(position.y * Tile.TILEHEIGHT)
+                entityType.setHandler(self.handler)
+                self.entityManager.addEntity(entityType)
+            })
         })
     }
 

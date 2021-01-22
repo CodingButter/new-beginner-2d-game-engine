@@ -30,6 +30,7 @@ class KeyManager {
         this.right = keys[39] || keys[68]
         this.down = keys[40] || keys[83]
         this.shift = keys[16]
+        this.enter = keys[13]
     }
     keyPressedTrigger(key, callback) {
         pressedTriggers.push({ key, callback })

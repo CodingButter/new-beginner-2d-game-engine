@@ -80,6 +80,10 @@ export default class Game {
     init() {
         Assets.init()
         handler = new Handler(this)
+        //Initiate Display and getting context
+        display = new Display(handler, parent, title, width, height)
+        display.updateSize()
+        g = display.getContext()
         gameCamera = new GameCamera(handler, 0, 0)
         keyManager = new KeyManager(handler)
         mouseManager = new MouseManager(handler)
@@ -93,11 +97,14 @@ export default class Game {
         gameState = new GameState(handler)
         State.setState(menuState)
 
-        //Initiate Display and getting context
-        display = new Display(handler, parent, title, width, height)
-        display.updateSize()
-        g = display.getContext()
-
+        keyManager.keyPressedTrigger('', () => {
+            if (State.getState() === menuState) {
+                //State.setState(gameState)
+            } else {
+                menuState = new MenuState(handler)
+                State.setState(menuState)
+            }
+        })
         const self = this
         const loop = (now) => {
             self.render()
@@ -141,6 +148,12 @@ export default class Game {
     getHeight() {
         return height
     }
+    getX() {
+        return display.getX()
+    }
+    getY() {
+        return display.getY()
+    }
     getState() {
         return State.getState()
     }
@@ -157,6 +170,9 @@ export default class Game {
     setHeight(value) {
         height = value
         display.getCanvas().height = value
+    }
+    getParentElement() {
+        return parent
     }
     getKeyManager() {
         return keyManager

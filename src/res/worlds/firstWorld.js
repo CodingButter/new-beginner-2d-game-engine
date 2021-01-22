@@ -1,4 +1,4 @@
-import { Tree } from 'Classes/Entities/Static'
+import { Tree, Mortium } from 'Classes/Entities/Static'
 
 const a1 = 0,
     a2 = 1,
@@ -46,22 +46,25 @@ export default {
             entityType: () => {
                 return new Tree(null, 0, 0)
             },
-            x: 7,
-            y: 3
+            positions: [
+                { x: 7, y: 3 },
+                { x: 15, y: 3 },
+                { x: 2, y: 8 },
+                { x: 20, y: 16 },
+                { x: 11, y: 13 }
+            ]
         },
         {
             entityType: () => {
-                return new Tree(null, 0, 0)
+                return new Mortium(null, 0, 0)
             },
-            x: 9,
-            y: 10
-        },
-        {
-            entityType: () => {
-                return new Tree(null, 0, 0)
-            },
-            x: 2,
-            y: 20
+            positions: [
+                { x: 10, y: 7 },
+                { x: 4, y: 12 },
+                { x: 14, y: 8 },
+                { x: 18, y: 10 },
+                { x: 10, y: 18 }
+            ]
         }
     ]
 }

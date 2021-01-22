@@ -1,7 +1,7 @@
 import { StaticEntity } from 'Classes/Entities/Static'
 import { toInt } from 'Classes/Utilities/Math'
 import { Assets } from 'Classes/GFX'
-export default class Tree extends StaticEntity {
+export default class Mortium extends StaticEntity {
     /**
      * Tree class constructor
      * @param {Handler} handler
@@ -13,13 +13,13 @@ export default class Tree extends StaticEntity {
             handler,
             x,
             y,
-            Assets.mainLevel.fall_tree[0].width,
-            Assets.mainLevel.fall_tree[0].height
+            Assets.mainLevel.mortium[0].width,
+            Assets.mainLevel.mortium[0].height
         )
-        this.bounds.height = this.height / 9
-        this.bounds.width = this.width / 4.2
-        this.bounds.x = this.width / 2.6
-        this.bounds.y = this.height / 1.11 - this.bounds.height
+        this.bounds.height = this.height / 4
+        this.bounds.width = this.width
+        this.bounds.x = this.x
+        this.bounds.y = this.height - this.bounds.height
     }
 
     /**
@@ -34,7 +34,7 @@ export default class Tree extends StaticEntity {
      */
     render(g) {
         g.drawSprite(
-            Assets.mainLevel.fall_tree[0],
+            Assets.mainLevel.mortium[0],
             toInt(this.x - this.handler.getGameCamera().getxOffset()),
             toInt(this.y - this.handler.getGameCamera().getyOffset()),
             this.width,

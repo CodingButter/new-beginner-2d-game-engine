@@ -24,9 +24,10 @@ export default class Player extends Creature {
         this.texture = Assets.player
         this.speed = Creature.DEFAULT_SPEED + 50
         this.sprint = 0
-
+        this.slashing = false
         //Animation
         var fps = 8
+
         this.animations = {
             Idle: new Animation(fpsToMili(fps), Assets.player.idle),
             walkUp: new Animation(fpsToMili(fps), Assets.player.walkUp),
@@ -61,7 +62,9 @@ export default class Player extends Creature {
         if (this.handler.getKeyManager().shift) {
             this.sprint = 100
         }
-
+        if (this.handler.getKeyManager().enter) {
+            this.slashing = true
+        }
         if (this.handler.getKeyManager().left) {
             this.xMove = -(this.sprint + this.speed) * deltaTime
         }
@@ -89,6 +92,7 @@ export default class Player extends Creature {
         this.currentAnimation.tick(deltaTime, -this.sprint / 10)
 
         this.handler.getGameCamera().centerOnEntity(this, deltaTime)
+
         this.getInput(deltaTime)
         this.move()
     }
@@ -116,6 +120,7 @@ export default class Player extends Creature {
      */
     setCurrentAnimation() {
         var direction = this.getMovementDirection()
+
         if (direction === 'Idle') {
             this.currentAnimation = this.animations.Idle
             return

@@ -27,6 +27,12 @@ export default class {
     getHeight() {
         return this.game.getHeight()
     }
+    getX() {
+        return this.game.getX()
+    }
+    getY() {
+        return this.game.getY()
+    }
     getGameCamera() {
         return this.game.getGameCamera()
     }
@@ -35,6 +41,9 @@ export default class {
     }
     getGameCanvas() {
         return this.game.getGameCanvas()
+    }
+    getParentElement() {
+        return this.game.getParentElement()
     }
     getGameState() {
         return this.game.getGameState()
