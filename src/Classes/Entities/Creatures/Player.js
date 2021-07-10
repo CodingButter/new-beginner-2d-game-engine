@@ -17,12 +17,12 @@ export default class Player extends Creature {
             Creature.DEFAULT_WIDTH * 2,
             Creature.DEFAULT_HEIGHT * 2
         )
-        this.bounds.x = this.width / 2.5
-        this.bounds.y = this.height - this.height / 2.5
         this.bounds.width = this.width / 4
         this.bounds.height = this.height / 4
+        this.bounds.y = this.height / 2 - this.bounds.height / 2
+        this.bounds.x = this.width / 4 - this.bounds.width / 2
         this.texture = Assets.player
-        this.speed = Creature.DEFAULT_SPEED + 50
+        this.speed = Creature.DEFAULT_SPEED + 100
         this.sprint = 0
         this.slashing = false
         //Animation
